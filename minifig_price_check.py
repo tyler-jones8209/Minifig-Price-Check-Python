@@ -54,6 +54,8 @@ def retrieve_price(soup, identifier, price_label, condition, period):
     except (IndexError, KeyError, AttributeError, ValueError):
         raise ValueError("Could not extract price. Page structure may have changed")
 
+    price = f"{float(price):.2f}"
+
     if price is None:
         raise ValueError("Price is None")
 
@@ -61,9 +63,9 @@ def retrieve_price(soup, identifier, price_label, condition, period):
     name = name.text
 
     if period.lower() == "current":
-      print(f"{price_label.capitalize()} price of a {condition.capitalize()} {name} ({identifier}) minifig during {period} time period: ${float(price)}")
+      print(f"{price_label.capitalize()} price of a {condition.capitalize()} {name} ({identifier}) minifig during {period} time period: ${price}")
     else:
-      print(f"{price_label.capitalize()} price of a {condition.capitalize()} {name} ({identifier}) minifig during the last 6 months: ${float(price)}")
+      print(f"{price_label.capitalize()} price of a {condition.capitalize()} {name} ({identifier}) minifig during the last 6 months: ${price}")
     
 retrieve_price(soup, identifier, price_label, condition, period)
 
